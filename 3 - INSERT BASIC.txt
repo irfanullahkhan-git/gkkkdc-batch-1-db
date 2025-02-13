@@ -1,0 +1,85 @@
+Microsoft Windows [Version 10.0.22631.4751]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\javak>mysql -u root -p
+Enter password: *****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 38
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| buildz_database    |
+| gdc_database       |
+| gdckkk             |
+| information_schema |
+| mango              |
+| my_database        |
+| mysql              |
+| performance_schema |
+| quizapp            |
+| sys                |
+| testing            |
+| watermelon         |
++--------------------+
+12 rows in set (0.01 sec)
+
+MySQL [(none)]> USE gdckkk;
+Database changed
+MySQL [gdckkk]> SHOW TABLES;
++------------------+
+| Tables_in_gdckkk |
++------------------+
+| users            |
++------------------+
+1 row in set (0.00 sec)
+
+MySQL [gdckkk]> DESC users;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ID      | int         | YES  |     | NULL    |       |
+| Name    | varchar(30) | YES  |     | NULL    |       |
+| Age     | int         | YES  |     | NULL    |       |
+| Phone   | varchar(11) | YES  |     | NULL    |       |
+| Address | text        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]> CREATE DATABASE attendance;
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [gdckkk]> INSERT INTO users(ID, Name, Phone, Age) VALUES(1, "Muhammad", "03211234567", 18);
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [gdckkk]> INSERT INTO users(ID, Name, Phone, Age) VALUES(2, "Wali", "03211234589",
+19);
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [gdckkk]> INSERT INTO users(ID, Name, Phone, Age) VALUES(3, "Ashan", "03211234554",
+ 19), (4, "Ammad", "03001234567", 18);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MySQL [gdckkk]> INSERT INTO users VALUES(5, "Ahmad", 20, "03451234567", "Nowshera");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users;
++------+----------+------+-------------+----------+
+| ID   | Name     | Age  | Phone       | Address  |
++------+----------+------+-------------+----------+
+|    1 | Muhammad |   18 | 03211234567 | NULL     |
+|    2 | Wali     |   19 | 03211234589 | NULL     |
+|    3 | Ashan    |   19 | 03211234554 | NULL     |
+|    4 | Ammad    |   18 | 03001234567 | NULL     |
+|    5 | Ahmad    |   20 | 03451234567 | Nowshera |
++------+----------+------+-------------+----------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]>
