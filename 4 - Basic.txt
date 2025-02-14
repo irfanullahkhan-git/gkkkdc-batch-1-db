@@ -1,0 +1,162 @@
+Microsoft Windows [Version 10.0.22631.4890]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\System32>mysql -u root -p
+Enter password: *****
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+C:\Windows\System32>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 10.1.38-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use gdckkk;
+ERROR 1049 (42000): Unknown database 'gdckkk'
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| buildz_database    |
+| gdc_database       |
+| information_schema |
+| master_repository  |
+| mobile_application |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| students           |
+| test               |
+| usp_repository     |
++--------------------+
+11 rows in set (0.03 sec)
+
+MariaDB [(none)]> exit
+Bye
+
+C:\Windows\System32>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| attendance         |
+| buildz_database    |
+| gdc_database       |
+| gdckkk             |
+| information_schema |
+| mango              |
+| my_database        |
+| mysql              |
+| performance_schema |
+| quizapp            |
+| sys                |
+| testing            |
+| watermelon         |
++--------------------+
+13 rows in set (0.01 sec)
+
+MySQL [(none)]> USE gdckkk;
+Database changed
+MySQL [gdckkk]> SELECT * FROM users;
++------+----------+------+-------------+----------+
+| ID   | Name     | Age  | Phone       | Address  |
++------+----------+------+-------------+----------+
+|    1 | Muhammad |   18 | 03211234567 | NULL     |
+|    2 | Wali     |   19 | 03211234589 | NULL     |
+|    3 | Ashan    |   19 | 03211234554 | NULL     |
+|    4 | Ammad    |   18 | 03001234567 | NULL     |
+|    5 | Ahmad    |   20 | 03451234567 | Nowshera |
++------+----------+------+-------------+----------+
+5 rows in set (0.01 sec)
+
+MySQL [gdckkk]> CREATE TABLE user_data(ID int, Name Varchar(30));
+Query OK, 0 rows affected (0.00 sec)
+
+MySQL [gdckkk]> SHOW TABLES;
++------------------+
+| Tables_in_gdckkk |
++------------------+
+| user_data        |
+| users            |
++------------------+
+2 rows in set (0.01 sec)
+
+MySQL [gdckkk]> SELECT * FROM user_data;
+Empty set (0.00 sec)
+
+MySQL [gdckkk]> DROP TABLE user_data;
+Query OK, 0 rows affected (0.01 sec)
+
+MySQL [gdckkk]> SHOW TABLES;
++------------------+
+| Tables_in_gdckkk |
++------------------+
+| users            |
++------------------+
+1 row in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM user_data;
+ERROR 1146 (42S02): Table 'gdckkk.user_data' doesn't exist
+MySQL [gdckkk]> SELECT * FROM users;
++------+----------+------+-------------+----------+
+| ID   | Name     | Age  | Phone       | Address  |
++------+----------+------+-------------+----------+
+|    1 | Muhammad |   18 | 03211234567 | NULL     |
+|    2 | Wali     |   19 | 03211234589 | NULL     |
+|    3 | Ashan    |   19 | 03211234554 | NULL     |
+|    4 | Ammad    |   18 | 03001234567 | NULL     |
+|    5 | Ahmad    |   20 | 03451234567 | Nowshera |
++------+----------+------+-------------+----------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]> DELETE FROM users;
+Query OK, 5 rows affected (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users;
+Empty set (0.00 sec)
+
+MySQL [gdckkk]> ALTER TABLE users DROP COLUMN Address;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MySQL [gdckkk]> DESC users;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | int         | YES  |     | NULL    |       |
+| Name  | varchar(30) | YES  |     | NULL    |       |
+| Age   | int         | YES  |     | NULL    |       |
+| Phone | varchar(11) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+MySQL [gdckkk]> ALTER TABLE users ADD COLUMN Address TEXT;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MySQL [gdckkk]> DESC users;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ID      | int         | YES  |     | NULL    |       |
+| Name    | varchar(30) | YES  |     | NULL    |       |
+| Age     | int         | YES  |     | NULL    |       |
+| Phone   | varchar(11) | YES  |     | NULL    |       |
+| Address | text        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]>
