@@ -1,0 +1,107 @@
+Microsoft Windows [Version 10.0.22631.4890]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\System32>mysql -u root -p
+Enter password: *****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 195
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> use gdckkk;
+Database changed
+MySQL [gdckkk]> desc users;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ID      | int         | YES  |     | NULL    |       |
+| Name    | varchar(30) | YES  |     | NULL    |       |
+| Age     | int         | YES  |     | NULL    |       |
+| Phone   | varchar(11) | YES  |     | NULL    |       |
+| Address | text        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+MySQL [gdckkk]> SELECT * FROM users;
+Empty set (0.01 sec)
+
+MySQL [gdckkk]> INSERT INTO users VALUES(1, "Ali", 20, "03211234567", "Nowshera");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [gdckkk]> INSERT INTO users VALUES(2, "Ashan", 19, "03451234567", "Nowshera");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [gdckkk]> INSERT INTO users VALUES(3, "Habib", 19, "03461234567", "Peshawar");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users;
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    1 | Ali   |   20 | 03211234567 | Nowshera |
+|    2 | Ashan |   19 | 03451234567 | Nowshera |
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+3 rows in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users;
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    1 | Ali   |   20 | 03211234567 | Nowshera |
+|    2 | Ashan |   19 | 03451234567 | Nowshera |
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+3 rows in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT ID, Name, Age FROM users;
++------+-------+------+
+| ID   | Name  | Age  |
++------+-------+------+
+|    1 | Ali   |   20 |
+|    2 | Ashan |   19 |
+|    3 | Habib |   19 |
++------+-------+------+
+3 rows in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT ID, Age, Name FROM users;
++------+------+-------+
+| ID   | Age  | Name  |
++------+------+-------+
+|    1 |   20 | Ali   |
+|    2 |   19 | Ashan |
+|    3 |   19 | Habib |
++------+------+-------+
+3 rows in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT ID, Age, Name FROM users WHERE Age > 19;
++------+------+------+
+| ID   | Age  | Name |
++------+------+------+
+|    1 |   20 | Ali  |
++------+------+------+
+1 row in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT ID, Age, Name FROM users;
++------+------+-------+
+| ID   | Age  | Name  |
++------+------+-------+
+|    1 |   20 | Ali   |
+|    2 |   19 | Ashan |
+|    3 |   19 | Habib |
++------+------+-------+
+3 rows in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT ID, Age, Name FROM users WHERE Age < 20;
++------+------+-------+
+| ID   | Age  | Name  |
++------+------+-------+
+|    2 |   19 | Ashan |
+|    3 |   19 | Habib |
++------+------+-------+
+2 rows in set (0.00 sec)
+
+MySQL [gdckkk]>
