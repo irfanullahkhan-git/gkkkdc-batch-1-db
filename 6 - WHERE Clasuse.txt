@@ -1,0 +1,139 @@
+Microsoft Windows [Version 10.0.22631.4890]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\javak>mysql -u root -p
+Enter password: *****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 200
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> use gdckkk;
+Database changed
+MySQL [gdckkk]> SELECT * FROM users;
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    1 | Ali   |   20 | 03211234567 | Nowshera |
+|    2 | Ashan |   19 | 03451234567 | Nowshera |
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+3 rows in set (0.02 sec)
+
+MySQL [gdckkk]> SELECT * FROM users WHERE Age < 20;
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    2 | Ashan |   19 | 03451234567 | Nowshera |
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+2 rows in set (0.01 sec)
+
+MySQL [gdckkk]> SELECT * FROM users WHERE Age < 20 AND Address = "Peshawar";
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+1 row in set (0.01 sec)
+
+MySQL [gdckkk]> SELECT * FROM users WHERE Age < 20 OR Address = "Peshawar";
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    2 | Ashan |   19 | 03451234567 | Nowshera |
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+2 rows in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users;
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    1 | Ali   |   20 | 03211234567 | Nowshera |
+|    2 | Ashan |   19 | 03451234567 | Nowshera |
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+3 rows in set (0.00 sec)
+
+MySQL [gdckkk]> INSERT INTO users VALUES(4, "Ahsan", 21, "03219874532", "Hayat Abad, Peshawar");
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [gdckkk]> SELECT * FROM users WHERE Address = "Peshawar";
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+1 row in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users WHERE Address LIKE "%Peshawar%";
++------+-------+------+-------------+----------------------+
+| ID   | Name  | Age  | Phone       | Address              |
++------+-------+------+-------------+----------------------+
+|    3 | Habib |   19 | 03461234567 | Peshawar             |
+|    4 | Ahsan |   21 | 03219874532 | Hayat Abad, Peshawar |
++------+-------+------+-------------+----------------------+
+2 rows in set (0.01 sec)
+
+MySQL [gdckkk]> SELECT * FROM users WHERE Phone LIKE "%567"
+    -> ;
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    1 | Ali   |   20 | 03211234567 | Nowshera |
+|    2 | Ashan |   19 | 03451234567 | Nowshera |
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+3 rows in set (0.00 sec)
+
+MySQL [gdckkk]> INSERT INTO users VALUES(4, "Mudassar", 21, "03215675432", "Hakeem Abad, Nowshera");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users;
++------+----------+------+-------------+-----------------------+
+| ID   | Name     | Age  | Phone       | Address               |
++------+----------+------+-------------+-----------------------+
+|    1 | Ali      |   20 | 03211234567 | Nowshera              |
+|    2 | Ashan    |   19 | 03451234567 | Nowshera              |
+|    3 | Habib    |   19 | 03461234567 | Peshawar              |
+|    4 | Ahsan    |   21 | 03219874532 | Hayat Abad, Peshawar  |
+|    4 | Mudassar |   21 | 03215675432 | Hakeem Abad, Nowshera |
++------+----------+------+-------------+-----------------------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users WHERE Phone LIKE "%567"
+    -> ;
++------+-------+------+-------------+----------+
+| ID   | Name  | Age  | Phone       | Address  |
++------+-------+------+-------------+----------+
+|    1 | Ali   |   20 | 03211234567 | Nowshera |
+|    2 | Ashan |   19 | 03451234567 | Nowshera |
+|    3 | Habib |   19 | 03461234567 | Peshawar |
++------+-------+------+-------------+----------+
+3 rows in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users WHERE Phone LIKE "%567%";
++------+----------+------+-------------+-----------------------+
+| ID   | Name     | Age  | Phone       | Address               |
++------+----------+------+-------------+-----------------------+
+|    1 | Ali      |   20 | 03211234567 | Nowshera              |
+|    2 | Ashan    |   19 | 03451234567 | Nowshera              |
+|    3 | Habib    |   19 | 03461234567 | Peshawar              |
+|    4 | Mudassar |   21 | 03215675432 | Hakeem Abad, Nowshera |
++------+----------+------+-------------+-----------------------+
+4 rows in set (0.00 sec)
+
+MySQL [gdckkk]> SELECT * FROM users WHERE Address LIKE "%Abad%";
++------+----------+------+-------------+-----------------------+
+| ID   | Name     | Age  | Phone       | Address               |
++------+----------+------+-------------+-----------------------+
+|    4 | Ahsan    |   21 | 03219874532 | Hayat Abad, Peshawar  |
+|    4 | Mudassar |   21 | 03215675432 | Hakeem Abad, Nowshera |
++------+----------+------+-------------+-----------------------+
+2 rows in set (0.00 sec)
+
+MySQL [gdckkk]>
