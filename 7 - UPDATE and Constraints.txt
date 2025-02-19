@@ -1,0 +1,139 @@
+Microsoft Windows [Version 10.0.22631.4890]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\System32>mysql -u root -p
+Enter password: *****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> USE gdckkk;
+Database changed
+MySQL [gdckkk]> SELECT * FROM users;
++------+----------+------+-------------+-----------------------+
+| ID   | Name     | Age  | Phone       | Address               |
++------+----------+------+-------------+-----------------------+
+|    1 | Ali      |   20 | 03211234567 | Nowshera              |
+|    2 | Ashan    |   19 | 03451234567 | Nowshera              |
+|    3 | Habib    |   19 | 03461234567 | Peshawar              |
+|    4 | Ahsan    |   21 | 03219874532 | Hayat Abad, Peshawar  |
+|    4 | Mudassar |   21 | 03215675432 | Hakeem Abad, Nowshera |
++------+----------+------+-------------+-----------------------+
+5 rows in set (0.02 sec)
+
+MySQL [gdckkk]> UPDATE users SET Name = "Muhammad Ali" WHERE ID = 1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MySQL [gdckkk]> SELECT * FROM users;
++------+--------------+------+-------------+-----------------------+
+| ID   | Name         | Age  | Phone       | Address               |
++------+--------------+------+-------------+-----------------------+
+|    1 | Muhammad Ali |   20 | 03211234567 | Nowshera              |
+|    2 | Ashan        |   19 | 03451234567 | Nowshera              |
+|    3 | Habib        |   19 | 03461234567 | Peshawar              |
+|    4 | Ahsan        |   21 | 03219874532 | Hayat Abad, Peshawar  |
+|    4 | Mudassar     |   21 | 03215675432 | Hakeem Abad, Nowshera |
++------+--------------+------+-------------+-----------------------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]> UPDATE users SET Age = Age + 2;
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+MySQL [gdckkk]> SELECT * FROM users;
++------+--------------+------+-------------+-----------------------+
+| ID   | Name         | Age  | Phone       | Address               |
++------+--------------+------+-------------+-----------------------+
+|    1 | Muhammad Ali |   22 | 03211234567 | Nowshera              |
+|    2 | Ashan        |   21 | 03451234567 | Nowshera              |
+|    3 | Habib        |   21 | 03461234567 | Peshawar              |
+|    4 | Ahsan        |   23 | 03219874532 | Hayat Abad, Peshawar  |
+|    4 | Mudassar     |   23 | 03215675432 | Hakeem Abad, Nowshera |
++------+--------------+------+-------------+-----------------------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]> ALTER TABLE users ADD COLUMN email_address VARCHAR(100);
+Query OK, 5 rows affected (0.05 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MySQL [gdckkk]> ALTER TABLE users MODIFY email_address VARCHAR(80) UNIQUE;
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MySQL [gdckkk]> DESC users;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| ID            | int         | YES  |     | NULL    |       |
+| Name          | varchar(30) | YES  |     | NULL    |       |
+| Age           | int         | YES  |     | NULL    |       |
+| Phone         | varchar(11) | YES  |     | NULL    |       |
+| Address       | text        | YES  |     | NULL    |       |
+| email_address | varchar(80) | YES  | UNI | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+MySQL [gdckkk]> ALTER TABLE users MODIFY email_address VARCHAR(80) UNIQUE NOT NULL;
+ERROR 1062 (23000): Duplicate entry '' for key 'users.email_address'
+MySQL [gdckkk]> SELECT * FROM users;
++------+--------------+------+-------------+-----------------------+---------------+
+| ID   | Name         | Age  | Phone       | Address               | email_address |
++------+--------------+------+-------------+-----------------------+---------------+
+|    1 | Muhammad Ali |   22 | 03211234567 | Nowshera              | NULL          |
+|    2 | Ashan        |   21 | 03451234567 | Nowshera              | NULL          |
+|    3 | Habib        |   21 | 03461234567 | Peshawar              | NULL          |
+|    4 | Ahsan        |   23 | 03219874532 | Hayat Abad, Peshawar  | NULL          |
+|    4 | Mudassar     |   23 | 03215675432 | Hakeem Abad, Nowshera | NULL          |
++------+--------------+------+-------------+-----------------------+---------------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]> UPDATE users SET email_address = "test@example.com";
+ERROR 1062 (23000): Duplicate entry 'test@example.com' for key 'users.email_address'
+MySQL [gdckkk]> SELECT * FROM users;
++------+--------------+------+-------------+-----------------------+------------------+
+| ID   | Name         | Age  | Phone       | Address               | email_address    |
++------+--------------+------+-------------+-----------------------+------------------+
+|    1 | Muhammad Ali |   22 | 03211234567 | Nowshera              | test@example.com |
+|    2 | Ashan        |   21 | 03451234567 | Nowshera              | NULL             |
+|    3 | Habib        |   21 | 03461234567 | Peshawar              | NULL             |
+|    4 | Ahsan        |   23 | 03219874532 | Hayat Abad, Peshawar  | NULL             |
+|    4 | Mudassar     |   23 | 03215675432 | Hakeem Abad, Nowshera | NULL             |
++------+--------------+------+-------------+-----------------------+------------------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]> UPDATE users SET email_address = "test1@example.com";
+ERROR 1062 (23000): Duplicate entry 'test1@example.com' for key 'users.email_address'
+MySQL [gdckkk]> SELECT * FROM users;
++------+--------------+------+-------------+-----------------------+-------------------+
+| ID   | Name         | Age  | Phone       | Address               | email_address     |
++------+--------------+------+-------------+-----------------------+-------------------+
+|    1 | Muhammad Ali |   22 | 03211234567 | Nowshera              | test1@example.com |
+|    2 | Ashan        |   21 | 03451234567 | Nowshera              | NULL              |
+|    3 | Habib        |   21 | 03461234567 | Peshawar              | NULL              |
+|    4 | Ahsan        |   23 | 03219874532 | Hayat Abad, Peshawar  | NULL              |
+|    4 | Mudassar     |   23 | 03215675432 | Hakeem Abad, Nowshera | NULL              |
++------+--------------+------+-------------+-----------------------+-------------------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]> UPDATE users SET email_address = "test1@example.com" WHERE ID > 1;
+ERROR 1062 (23000): Duplicate entry 'test1@example.com' for key 'users.email_address'
+MySQL [gdckkk]> UPDATE users SET email_address = "test2@example.com" WHERE ID > 1;
+ERROR 1062 (23000): Duplicate entry 'test2@example.com' for key 'users.email_address'
+MySQL [gdckkk]> SELECT * FROM users;
++------+--------------+------+-------------+-----------------------+-------------------+
+| ID   | Name         | Age  | Phone       | Address               | email_address     |
++------+--------------+------+-------------+-----------------------+-------------------+
+|    1 | Muhammad Ali |   22 | 03211234567 | Nowshera              | test1@example.com |
+|    2 | Ashan        |   21 | 03451234567 | Nowshera              | test2@example.com |
+|    3 | Habib        |   21 | 03461234567 | Peshawar              | NULL              |
+|    4 | Ahsan        |   23 | 03219874532 | Hayat Abad, Peshawar  | NULL              |
+|    4 | Mudassar     |   23 | 03215675432 | Hakeem Abad, Nowshera | NULL              |
++------+--------------+------+-------------+-----------------------+-------------------+
+5 rows in set (0.00 sec)
+
+MySQL [gdckkk]>
