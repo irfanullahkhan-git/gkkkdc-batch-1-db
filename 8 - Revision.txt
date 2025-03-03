@@ -1,0 +1,173 @@
+Microsoft Windows [Version 10.0.22631.4890]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\System32>mysql -u root -p
+Enter password: *****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| attendance         |
+| buildz_database    |
+| gdc_database       |
+| gdckkk             |
+| information_schema |
+| mango              |
+| my_database        |
+| mysql              |
+| performance_schema |
+| quizapp            |
+| sys                |
+| testing            |
+| watermelon         |
++--------------------+
+13 rows in set (0.01 sec)
+
+MySQL [(none)]> CREATE DATABASE college;
+Query OK, 1 row affected (0.04 sec)
+
+MySQL [(none)]> USE college;
+Database changed
+MySQL [college]> SHOW TABLES;
+Empty set (0.10 sec)
+
+MySQL [college]> CREATE TABLE students (ID INT, Name VARCHAR(30), FatherName VARCHAR(30), Phone Varchar(11), Department VARCHAR(20), Semester VARCHAR(5), Address TEXT );
+Query OK, 0 rows affected (0.06 sec)
+
+MySQL [college]> SHOW TABLES;
++-------------------+
+| Tables_in_college |
++-------------------+
+| students          |
++-------------------+
+1 row in set (0.00 sec)
+
+MySQL [college]> INSERT INTO students (ID, Name, FatherName, Phone, Department, Semester, Address) VALUES(1, "
+Ali", "Muhammad Khan", "03211234567", "Computer Science", "IV", "Nowshera");
+Query OK, 1 row affected (0.03 sec)
+
+MySQL [college]> INSERT INTO students (ID, Name, FatherName, Phone, Department, Semester, Address) VALUES(2, "
+Wali", "Ayub Khan", "03211234874", "Computer Science", "IV", "Nowshera");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [college]> INSERT INTO students (ID, Name, FatherName, Phone, Department, Semester) VALUES(3, "Faisal",
+"Noor Islam", "03212546987", "Computer Science", "IV");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [college]> DESC students;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| ID         | int         | YES  |     | NULL    |       |
+| Name       | varchar(30) | YES  |     | NULL    |       |
+| FatherName | varchar(30) | YES  |     | NULL    |       |
+| Phone      | varchar(11) | YES  |     | NULL    |       |
+| Department | varchar(20) | YES  |     | NULL    |       |
+| Semester   | varchar(5)  | YES  |     | NULL    |       |
+| Address    | text        | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+
+MySQL [college]> INSERT INTO students VALUES(4, "Maaz", "Mati Ur Rehamn", "03214578213", "Computer Science", "
+IV", "Swabi");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [college]> SELECT ID, Name, FatherName, Phone, Address, Department, Semester FROM students;
++------+--------+----------------+-------------+----------+------------------+----------+
+| ID   | Name   | FatherName     | Phone       | Address  | Department       | Semester |
++------+--------+----------------+-------------+----------+------------------+----------+
+|    1 | Ali    | Muhammad Khan  | 03211234567 | Nowshera | Computer Science | IV       |
+|    2 | Wali   | Ayub Khan      | 03211234874 | Nowshera | Computer Science | IV       |
+|    3 | Faisal | Noor Islam     | 03212546987 | NULL     | Computer Science | IV       |
+|    4 | Maaz   | Mati Ur Rehamn | 03214578213 | Swabi    | Computer Science | IV       |
++------+--------+----------------+-------------+----------+------------------+----------+
+4 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students;
++------+--------+----------------+-------------+------------------+----------+----------+
+| ID   | Name   | FatherName     | Phone       | Department       | Semester | Address  |
++------+--------+----------------+-------------+------------------+----------+----------+
+|    1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera |
+|    2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera |
+|    3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | NULL     |
+|    4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    |
++------+--------+----------------+-------------+------------------+----------+----------+
+4 rows in set (0.00 sec)
+
+MySQL [college]> SELECT ID, Name, FatherName FROM students;
++------+--------+----------------+
+| ID   | Name   | FatherName     |
++------+--------+----------------+
+|    1 | Ali    | Muhammad Khan  |
+|    2 | Wali   | Ayub Khan      |
+|    3 | Faisal | Noor Islam     |
+|    4 | Maaz   | Mati Ur Rehamn |
++------+--------+----------------+
+4 rows in set (0.00 sec)
+
+MySQL [college]> UPDATE students SET Address="Shaidu" WHERE ID = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MySQL [college]> SELECT * FROM students;
++------+--------+----------------+-------------+------------------+----------+----------+
+| ID   | Name   | FatherName     | Phone       | Department       | Semester | Address  |
++------+--------+----------------+-------------+------------------+----------+----------+
+|    1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera |
+|    2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera |
+|    3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   |
+|    4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    |
++------+--------+----------------+-------------+------------------+----------+----------+
+4 rows in set (0.00 sec)
+
+MySQL [college]> ALTER TABLE students ADD COLUMN GuardianPhone VARCHAR(11);
+Query OK, 4 rows affected (0.06 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MySQL [college]> SELECT * FROM students;
++------+--------+----------------+-------------+------------------+----------+----------+---------------+
+| ID   | Name   | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone |
++------+--------+----------------+-------------+------------------+----------+----------+---------------+
+|    1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |
+|    2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |
+|    3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |
+|    4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |
++------+--------+----------------+-------------+------------------+----------+----------+---------------+
+4 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students WHERE Address="Nowshera";
++------+------+---------------+-------------+------------------+----------+----------+---------------+
+| ID   | Name | FatherName    | Phone       | Department       | Semester | Address  | GuardianPhone |
++------+------+---------------+-------------+------------------+----------+----------+---------------+
+|    1 | Ali  | Muhammad Khan | 03211234567 | Computer Science | IV       | Nowshera | NULL          |
+|    2 | Wali | Ayub Khan     | 03211234874 | Computer Science | IV       | Nowshera | NULL          |
++------+------+---------------+-------------+------------------+----------+----------+---------------+
+2 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students WHERE Department="Computer Science" AND Name="Wali";
++------+------+------------+-------------+------------------+----------+----------+---------------+
+| ID   | Name | FatherName | Phone       | Department       | Semester | Address  | GuardianPhone |
++------+------+------------+-------------+------------------+----------+----------+---------------+
+|    2 | Wali | Ayub Khan  | 03211234874 | Computer Science | IV       | Nowshera | NULL          |
++------+------+------------+-------------+------------------+----------+----------+---------------+
+1 row in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students WHERE Address LIKE "%sh%";
++------+--------+---------------+-------------+------------------+----------+----------+---------------+
+| ID   | Name   | FatherName    | Phone       | Department       | Semester | Address  | GuardianPhone |
++------+--------+---------------+-------------+------------------+----------+----------+---------------+
+|    1 | Ali    | Muhammad Khan | 03211234567 | Computer Science | IV       | Nowshera | NULL          |
+|    2 | Wali   | Ayub Khan     | 03211234874 | Computer Science | IV       | Nowshera | NULL          |
+|    3 | Faisal | Noor Islam    | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |
++------+--------+---------------+-------------+------------------+----------+----------+---------------+
+3 rows in set (0.01 sec)
+
+MySQL [college]>
