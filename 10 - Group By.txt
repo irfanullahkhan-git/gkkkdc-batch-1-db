@@ -1,0 +1,346 @@
+Microsoft Windows [Version 10.0.22631.4890]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\System32>mysql -u root -p
+Enter password: *****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> use college;
+Database changed
+MySQL [college]> SELECT * FROM students;
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name   | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
+|  2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  5 | Azhar  | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  6 | Yasir  | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.02 sec)
+
+MySQL [college]> SELECT COUNT(*) FROM students WHERE Department = "Computer Science";
++----------+
+| COUNT(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.01 sec)
+
+MySQL [college]> SELECT COUNT(*) FROM students WHERE Department = "Computer Science" OR Department = "Economics";
++----------+
+| COUNT(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.00 sec)
+
+MySQL [college]> SELECT COUNT(*) as TotalStudents FROM students;
++---------------+
+| TotalStudents |
++---------------+
+|             6 |
++---------------+
+1 row in set (0.00 sec)
+
+MySQL [college]> SELECT COUNT(*) FROM students GROUP BY Department;
++----------+
+| COUNT(*) |
++----------+
+|        4 |
+|        2 |
++----------+
+2 rows in set (0.00 sec)
+
+MySQL [college]> SELECT Name, COUNT(*) FROM students GROUP BY Department;
++-------+----------+
+| Name  | COUNT(*) |
++-------+----------+
+| Ali   |        4 |
+| Azhar |        2 |
++-------+----------+
+2 rows in set (0.00 sec)
+
+MySQL [college]> SELECT Department, COUNT(*) FROM students GROUP BY Department;
++------------------+----------+
+| Department       | COUNT(*) |
++------------------+----------+
+| Computer Science |        4 |
+| Economics        |        2 |
++------------------+----------+
+2 rows in set (0.00 sec)
+
+MySQL [college]> SELECT Name, COUNT(*) FROM students GROUP BY Name;
++--------+----------+
+| Name   | COUNT(*) |
++--------+----------+
+| Ali    |        1 |
+| Wali   |        1 |
+| Faisal |        1 |
+| Maaz   |        1 |
+| Azhar  |        1 |
+| Yasir  |        1 |
++--------+----------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT Name FROM students GROUP BY Name;
++--------+
+| Name   |
++--------+
+| Ali    |
+| Wali   |
+| Faisal |
+| Maaz   |
+| Azhar  |
+| Yasir  |
++--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT Department FROM students GROUP BY Department;
++------------------+
+| Department       |
++------------------+
+| Computer Science |
+| Economics        |
++------------------+
+2 rows in set (0.00 sec)
+
+MySQL [college]> SELECT DISTINCT(Department) FROM students;
++------------------+
+| Department       |
++------------------+
+| Computer Science |
+| Economics        |
++------------------+
+2 rows in set (0.00 sec)
+
+MySQL [college]> SELECT DISTINCT(Department), Count(*) FROM students;
++------------------+----------+
+| Department       | Count(*) |
++------------------+----------+
+| Computer Science |        6 |
++------------------+----------+
+1 row in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students;
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name   | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
+|  2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  5 | Azhar  | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  6 | Yasir  | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students ORDER BY ID DESC;
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name   | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  6 | Yasir  | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
+|  5 | Azhar  | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students ORDER BY ID ASC;
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name   | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
+|  2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  5 | Azhar  | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  6 | Yasir  | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students ORDER BY ID;
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name   | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
+|  2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  5 | Azhar  | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  6 | Yasir  | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students ORDER BY Name ASC;
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name   | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
+|  5 | Azhar  | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  6 | Yasir  | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students ORDER BY Name DESC;
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name   | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  6 | Yasir  | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
+|  2 | Wali   | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  4 | Maaz   | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  3 | Faisal | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  5 | Azhar  | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  1 | Ali    | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
++----+--------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> UPDATE students SET Name = "Ali" WHERE ID = 3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MySQL [college]> SELECT * FROM students ORDER BY Name DESC;
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name  | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  6 | Yasir | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
+|  2 | Wali  | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  4 | Maaz  | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  5 | Azhar | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  1 | Ali   | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
+|  3 | Ali   | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students ORDER BY Name DESC, FatherName ASC;
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name  | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  6 | Yasir | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
+|  2 | Wali  | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  4 | Maaz  | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  5 | Azhar | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  1 | Ali   | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
+|  3 | Ali   | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students ORDER BY Name DESC, FatherName DESC;
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name  | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  6 | Yasir | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
+|  2 | Wali  | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  4 | Maaz  | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  5 | Azhar | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  3 | Ali   | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  1 | Ali   | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students ORDER BY 1 DESC;
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name  | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  6 | Yasir | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
+|  5 | Azhar | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  4 | Maaz  | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  3 | Ali   | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  2 | Wali  | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  1 | Ali   | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students ORDER BY 2 DESC;
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name  | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  6 | Yasir | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
+|  2 | Wali  | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  4 | Maaz  | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  5 | Azhar | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  1 | Ali   | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
+|  3 | Ali   | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
++----+-------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> SELECT Name, ID, FatherName FROM students ORDER BY 1 DESC;
++-------+----+----------------+
+| Name  | ID | FatherName     |
++-------+----+----------------+
+| Yasir |  6 | Muhammad Gul   |
+| Wali  |  2 | Ayub Khan      |
+| Maaz  |  4 | Mati Ur Rehamn |
+| Azhar |  5 | Haji Saib      |
+| Ali   |  1 | Muhammad Khan  |
+| Ali   |  3 | Noor Islam     |
++-------+----+----------------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> INSERT INTO students VALUES(NULL, "Mustafa", "Khan Ali", "03241238764", "Computer Science", "II", "Swabi", "
+03236543281", 0, 0);
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [college]> INSERT INTO students VALUES(NULL, "Muwahid Khan", "Irfan Khan", "03217645312", "Computer Science", "II", "Nowshera", "03239215010", 0, 0);
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [college]> INSERT INTO students VALUES(NULL, "Arsalan", "Umar Khan", "03217645312", "Economics", "II", "Nowshera", "032
+38572145", 0, 0);
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [college]> INSERT INTO students VALUES(NULL, "Ahsan", "Umar Khan", "03217645312", "Economics", "II", "Nowshera", "03238
+572145", 0, 0);
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [college]> SELECT * FROM students;
++----+--------------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+| ID | Name         | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics |
++----+--------------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL |
+|  2 | Wali         | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL |
+|  3 | Ali          | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL |
+|  5 | Azhar        | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | Computer Science | II       | Swabi    | 03236543281   |    0 |      0 |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | Computer Science | II       | Nowshera | 03239215010   |    0 |      0 |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | Economics        | II       | Nowshera | 03238572145   |    0 |      0 |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | Economics        | II       | Nowshera | 03238572145   |    0 |      0 |
++----+--------------+----------------+-------------+------------------+----------+----------+---------------+------+--------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> SELECT Department, Semester, Count(*) FROM students GROUP BY Department, Semester;
++------------------+----------+----------+
+| Department       | Semester | Count(*) |
++------------------+----------+----------+
+| Computer Science | IV       |        4 |
+| Economics        | III      |        2 |
+| Computer Science | II       |        2 |
+| Economics        | II       |        2 |
++------------------+----------+----------+
+4 rows in set (0.00 sec)
+
+MySQL [college]> SELECT Department, Semester, Count(*) FROM students GROUP BY Department, Semester ORDER BY Department;
++------------------+----------+----------+
+| Department       | Semester | Count(*) |
++------------------+----------+----------+
+| Computer Science | II       |        2 |
+| Computer Science | IV       |        4 |
+| Economics        | II       |        2 |
+| Economics        | III      |        2 |
++------------------+----------+----------+
+4 rows in set (0.00 sec)
+
+MySQL [college]>
