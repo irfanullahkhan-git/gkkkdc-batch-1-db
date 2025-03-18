@@ -1,0 +1,396 @@
+Microsoft Windows [Version 10.0.22631.5039]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\System32>mysql -u root -p
+Enter password: *****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| attendance         |
+| buildz_database    |
+| college            |
+| exampledb          |
+| gdc_database       |
+| gdckkk             |
+| information_schema |
+| mango              |
+| my_database        |
+| mysql              |
+| performance_schema |
+| quizapp            |
+| sys                |
+| testing            |
+| watermelon         |
++--------------------+
+15 rows in set (0.02 sec)
+
+MySQL [(none)]> use college;
+Database changed
+MySQL [college]> SELECT * FROM students;
++----+--------------+----------------+-------------+------------------+----------+----------+---------------+------+--------+--------------------------+
+| ID | Name         | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics | subject                  |
++----+--------------+----------------+-------------+------------------+----------+----------+---------------+------+--------+--------------------------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  2 | Wali         | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  3 | Ali          | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  5 | Azhar        | Haji Saib      | 03219328719 | Economics        | III      | Peshawar | 03241238181   | NULL |     46 | NULL                     |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | Economics        | III      | Peshawar | 03241238181   | NULL |     96 | NULL                     |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | Computer Science | II       | Swabi    | 03236543281   |    0 |      0 | NULL                     |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | Computer Science | II       | Nowshera | 03239215010   |    0 |      0 | NULL                     |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | Economics        | II       | Nowshera | 03238572145   |    0 |      0 | NULL                     |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | Economics        | II       | Nowshera | 03238572145   |    0 |      0 | NULL                     |
++----+--------------+----------------+-------------+------------------+----------+----------+---------------+------+--------+--------------------------+
+10 rows in set (0.02 sec)
+
+MySQL [college]> CREATE TABLE Depratments (ID INT PRIMARY KEY AUTO_INCREMENT. Name VARCHAR(30));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use neCREATE TABCREATE TABLE Depratments (ID INT PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(30));
+Query OK, 0 rows affected (0.02 sec)ments (ID INT PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(30)
+
+MySQL [college]> DESC Depar
+MySQL [college]> ALTER TABLE Depratments RENAME Departments;
+Query OK, 0 rows affected (0.02 sec)
+
+MySQL [college]> DESC Departments;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| ID    | int         | NO   | PRI | NULL    | auto_increment |
+| Name  | varchar(30) | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.02 sec)
+
+MySQL [college]> INSERT INTO Departments VALUES(NULL, "Economics"), (NULL, "Computer Science");
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MySQL [college]> SELECT * FROM Departments;
++----+------------------+
+| ID | Name             |
++----+------------------+
+|  1 | Economics        |
+|  2 | Computer Science |
++----+------------------+
+2 rows in set (0.00 sec)
+
+MySQL [college]> UPDATE Students SET Department = 1 WHERE Department = "Economics";
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+MySQL [college]> SELECT * FROM Departments;
++----+------------------+
+| ID | Name             |
++----+------------------+
+|  1 | Economics        |
+|  2 | Computer Science |
++----+------------------+
+2 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students;
++----+--------------+----------------+-------------+------------------+----------+----------+---------------+------+--------+--------------------------+
+| ID | Name         | FatherName     | Phone       | Department       | Semester | Address  | GuardianPhone | OOP  | Civics | subject
+       |
++----+--------------+----------------+-------------+------------------+----------+----------+---------------+------+--------+--------------------------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | Computer Science | IV       | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  2 | Wali         | Ayub Khan      | 03211234874 | Computer Science | IV       | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  3 | Ali          | Noor Islam     | 03212546987 | Computer Science | IV       | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | Computer Science | IV       | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  5 | Azhar        | Haji Saib      | 03219328719 | 1                | III      | Peshawar | 03241238181   | NULL |     46 | NULL
+       |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | 1                | III      | Peshawar | 03241238181   | NULL |     96 | NULL                     |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | Computer Science | II       | Swabi    | 03236543281   |    0 |      0 | NULL
+       |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | Computer Science | II       | Nowshera | 03239215010   |    0 |      0 | NULL
+       |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | 1                | II       | Nowshera | 03238572145   |    0 |      0 | NULL
+       |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | 1                | II       | Nowshera | 03238572145   |    0 |      0 | NULL
+       |
++----+--------------+----------------+-------------+------------------+----------+----------+---------------+------+--------+--------------------------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> UPDATE Students SET Department = 2 WHERE Department = "Computer Science";
+Query OK, 6 rows affected (0.00 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+MySQL [college]> SELECT * FROM students;
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+| ID | Name         | FatherName     | Phone       | Department | Semester | Address  | GuardianPhone | OOP  | Civics | subject
+ |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | 2          | IV       | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  2 | Wali         | Ayub Khan      | 03211234874 | 2          | IV       | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  3 | Ali          | Noor Islam     | 03212546987 | 2          | IV       | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | 2          | IV       | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  5 | Azhar        | Haji Saib      | 03219328719 | 1          | III      | Peshawar | 03241238181   | NULL |     46 | NULL
+ |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | 1          | III      | Peshawar | 03241238181   | NULL |     96 | NULL
+ |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | 2          | II       | Swabi    | 03236543281   |    0 |      0 | NULL                     |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | 2          | II       | Nowshera | 03239215010   |    0 |      0 | NULL
+ |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | 1          | II       | Nowshera | 03238572145   |    0 |      0 | NULL
+ |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | 1          | II       | Nowshera | 03238572145   |    0 |      0 | NULL
+ |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM Students st INNER JOIN Departments dept ON st.Department = dept.ID;
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+----+------------------+
+| ID | Name         | FatherName     | Phone       | Department | Semester | Address  | GuardianPhone | OOP  | Civics | subject
+ | ID | Name             |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+----+------------------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | 2          | IV       | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |  2 | Computer Science |
+|  2 | Wali         | Ayub Khan      | 03211234874 | 2          | IV       | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |  2 | Computer Science |
+|  3 | Ali          | Noor Islam     | 03212546987 | 2          | IV       | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |  2 | Computer Science |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | 2          | IV       | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |  2 | Computer Science |
+|  5 | Azhar        | Haji Saib      | 03219328719 | 1          | III      | Peshawar | 03241238181   | NULL |     46 | NULL
+ |  1 | Economics        |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | 1          | III      | Peshawar | 03241238181   | NULL |     96 | NULL
+ |  1 | Economics        |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | 2          | II       | Swabi    | 03236543281   |    0 |      0 | NULL
+ |  2 | Computer Science |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | 2          | II       | Nowshera | 03239215010   |    0 |      0 | NULL
+ |  2 | Computer Science |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | 1          | II       | Nowshera | 03238572145   |    0 |      0 | NULL
+ |  1 | Economics        |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | 1          | II       | Nowshera | 03238572145   |    0 |      0 | NULL
+ |  1 | Economics        |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+----+------------------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> SELECT st.ID, st.Name, st.FatherName, dept.Name FROM Students st INNER JOIN Departments dept ON st.Department = dept.ID;
++----+--------------+----------------+------------------+
+| ID | Name         | FatherName     | Name             |
++----+--------------+----------------+------------------+
+|  1 | Ali          | Muhammad Khan  | Computer Science |
+|  2 | Wali         | Ayub Khan      | Computer Science |
+|  3 | Ali          | Noor Islam     | Computer Science |
+|  4 | Maaz         | Mati Ur Rehamn | Computer Science |
+|  5 | Azhar        | Haji Saib      | Economics        |
+|  6 | Yasir        | Muhammad Gul   | Economics        |
+|  7 | Mustafa      | Khan Ali       | Computer Science |
+|  8 | Muwahid Khan | Irfan Khan     | Computer Science |
+|  9 | Arsalan      | Umar Khan      | Economics        |
+| 10 | Ahsan        | Umar Khan      | Economics        |
++----+--------------+----------------+------------------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> SELECT st.ID, st.Name, st.FatherName, dept.Name FROM Students st INNER JOIN Departments dept ON st.Department = dept.ID WHERE dept.name = "Computer Science";
++----+--------------+----------------+------------------+
+| ID | Name         | FatherName     | Name             |
++----+--------------+----------------+------------------+
+|  1 | Ali          | Muhammad Khan  | Computer Science |
+|  2 | Wali         | Ayub Khan      | Computer Science |
+|  3 | Ali          | Noor Islam     | Computer Science |
+|  4 | Maaz         | Mati Ur Rehamn | Computer Science |
+|  7 | Mustafa      | Khan Ali       | Computer Science |
+|  8 | Muwahid Khan | Irfan Khan     | Computer Science |
++----+--------------+----------------+------------------+
+6 rows in set (0.00 sec)
+
+MySQL [college]> CRETAE TABLE Semesters (INT ID PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(30));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CRETAE TABLE Semesters (INT ID PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(30))' at line 1
+MySQL [college]> CRETAE TABLE Semesters (INT ID PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(30))
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CRETAE TABLE Semesters (INT ID PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(30))' at line 1
+MySQL [college]> CRETAE TABLE Semesters (ID INT PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(30))
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CRETAE TABLE Semesters (ID INT PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(30))' at line 1
+MySQL [college]> CREATE TABLE Semesters (ID INT PRIMARY KEY AUTO_INCREMENT, Name VARCHAR(30));
+Query OK, 0 rows affected (0.03 sec)
+
+MySQL [college]> INSERT INTO Semesters VALUE(NULL, "Sem-I"), (NULL,"Sem-II"), (NULL, "Sem-III"), (NULL, "Sem-IV"), (NULL, "Sem-V"), (NULL, "Sem-
+VI", (NULL, "Sem-VII"), (NULL, "Sem-VIII");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+MySQL [college]> INSERT INTO Semesters VALUES(NULL, "Sem-I"), (NULL,"Sem-II"), (NULL, "Sem-III"), (NULL, "Sem-IV"), (NULL, "Sem-V"), (NULL, "Sem
+-VI", (NULL, "Sem-VII"), (NULL, "Sem-VIII");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+MySQL [college]> INSERT INTO Semesters VALUES(NULL, "Sem-I"), (NULL,"Sem-II"), (NULL, "Sem-III"), (NULL, "Sem-IV"), (NULL, "Sem-V"), (NULL, "Sem
+-VI"), (NULL, "Sem-VII"), (NULL, "Sem-VIII");
+Query OK, 8 rows affected (0.00 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+MySQL [college]> SELECT * FROM Semesters;
++----+----------+
+| ID | Name     |
++----+----------+
+|  1 | Sem-I    |
+|  2 | Sem-II   |
+|  3 | Sem-III  |
+|  4 | Sem-IV   |
+|  5 | Sem-V    |
+|  6 | Sem-VI   |
+|  7 | Sem-VII  |
+|  8 | Sem-VIII |
++----+----------+
+8 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students;
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+| ID | Name         | FatherName     | Phone       | Department | Semester | Address  | GuardianPhone | OOP  | Civics | subject
+ |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | 2          | IV       | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  2 | Wali         | Ayub Khan      | 03211234874 | 2          | IV       | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  3 | Ali          | Noor Islam     | 03212546987 | 2          | IV       | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | 2          | IV       | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  5 | Azhar        | Haji Saib      | 03219328719 | 1          | III      | Peshawar | 03241238181   | NULL |     46 | NULL
+ |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | 1          | III      | Peshawar | 03241238181   | NULL |     96 | NULL
+ |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | 2          | II       | Swabi    | 03236543281   |    0 |      0 | NULL
+ |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | 2          | II       | Nowshera | 03239215010   |    0 |      0 | NULL
+ |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | 1          | II       | Nowshera | 03238572145   |    0 |      0 | NULL
+ |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | 1          | II       | Nowshera | 03238572145   |    0 |      0 | NULL
+ |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> UPDATE Students SET Semester = 4 WHERE Semester = "IV";
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+MySQL [college]> UPDATE Students SET Semester = 3 WHERE Semester = "III";
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MySQL [college]> UPDATE Students SET Semester = 2 WHERE Semester = "II";
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+MySQL [college]> SELECT * FROM students;
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+| ID | Name         | FatherName     | Phone       | Department | Semester | Address  | GuardianPhone | OOP  | Civics | subject
+ |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | 2          | 4        | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  2 | Wali         | Ayub Khan      | 03211234874 | 2          | 4        | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  3 | Ali          | Noor Islam     | 03212546987 | 2          | 4        | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | 2          | 4        | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  5 | Azhar        | Haji Saib      | 03219328719 | 1          | 3        | Peshawar | 03241238181   | NULL |     46 | NULL
+ |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | 1          | 3        | Peshawar | 03241238181   | NULL |     96 | NULL
+ |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | 2          | 2        | Swabi    | 03236543281   |    0 |      0 | NULL
+ |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | 2          | 2        | Nowshera | 03239215010   |    0 |      0 | NULL
+ |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+ |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+ |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM Students st INNER JOIN Semesters sem ON sem.ID = st.Semester;
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+----+---------+
+| ID | Name         | FatherName     | Phone       | Department | Semester | Address  | GuardianPhone | OOP  | Civics | subject                  | ID | Name    |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+----+---------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | 2          | 4        | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |  4 | Sem-IV  |
+|  2 | Wali         | Ayub Khan      | 03211234874 | 2          | 4        | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |  4 | Sem-IV  |
+|  3 | Ali          | Noor Islam     | 03212546987 | 2          | 4        | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |  4 | Sem-IV  |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | 2          | 4        | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |  4 | Sem-IV  |
+|  5 | Azhar        | Haji Saib      | 03219328719 | 1          | 3        | Peshawar | 03241238181   | NULL |     46 | NULL
+           |  3 | Sem-III |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | 1          | 3        | Peshawar | 03241238181   | NULL |     96 | NULL
+           |  3 | Sem-III |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | 2          | 2        | Swabi    | 03236543281   |    0 |      0 | NULL
+           |  2 | Sem-II  |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | 2          | 2        | Nowshera | 03239215010   |    0 |      0 | NULL
+           |  2 | Sem-II  |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+           |  2 | Sem-II  |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+           |  2 | Sem-II  |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+----+---------+
+10 rows in set (0.01 sec)
+
+MySQL [college]> SELECT Name, FatherName, Name FROM Students st INNER JOIN Semesters sem ON sem.ID = st.Semester;
+ERROR 1052 (23000): Column 'Name' in field list is ambiguous
+MySQL [college]> SELECT st.Name, FatherName, sem.Name FROM Students st INNER JOIN Semesters sem ON sem.ID = st.Semester;
++--------------+----------------+---------+
+| Name         | FatherName     | Name    |
++--------------+----------------+---------+
+| Ali          | Muhammad Khan  | Sem-IV  |
+| Wali         | Ayub Khan      | Sem-IV  |
+| Ali          | Noor Islam     | Sem-IV  |
+| Maaz         | Mati Ur Rehamn | Sem-IV  |
+| Azhar        | Haji Saib      | Sem-III |
+| Yasir        | Muhammad Gul   | Sem-III |
+| Mustafa      | Khan Ali       | Sem-II  |
+| Muwahid Khan | Irfan Khan     | Sem-II  |
+| Arsalan      | Umar Khan      | Sem-II  |
+| Ahsan        | Umar Khan      | Sem-II  |
++--------------+----------------+---------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> SELECT st.Name, FatherName, sem.Name FROM Students st INNER JOIN Semesters sem ON sem.ID = st.Semester INNER JOIN Dep
+artments dept ON st.Department = dept.ID;
++--------------+----------------+---------+
+| Name         | FatherName     | Name    |
++--------------+----------------+---------+
+| Ali          | Muhammad Khan  | Sem-IV  |
+| Wali         | Ayub Khan      | Sem-IV  |
+| Ali          | Noor Islam     | Sem-IV  |
+| Maaz         | Mati Ur Rehamn | Sem-IV  |
+| Azhar        | Haji Saib      | Sem-III |
+| Yasir        | Muhammad Gul   | Sem-III |
+| Mustafa      | Khan Ali       | Sem-II  |
+| Muwahid Khan | Irfan Khan     | Sem-II  |
+| Arsalan      | Umar Khan      | Sem-II  |
+| Ahsan        | Umar Khan      | Sem-II  |
++--------------+----------------+---------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> SELECT st.Name, FatherName, dept.Name, sem.Name FROM Students st INNER JOIN Semesters sem ON sem.ID = st.Semester INN
+ER JOIN Departments dept ON st.Department = dept.ID;
++--------------+----------------+------------------+---------+
+| Name         | FatherName     | Name             | Name    |
++--------------+----------------+------------------+---------+
+| Ali          | Muhammad Khan  | Computer Science | Sem-IV  |
+| Wali         | Ayub Khan      | Computer Science | Sem-IV  |
+| Ali          | Noor Islam     | Computer Science | Sem-IV  |
+| Maaz         | Mati Ur Rehamn | Computer Science | Sem-IV  |
+| Azhar        | Haji Saib      | Economics        | Sem-III |
+| Yasir        | Muhammad Gul   | Economics        | Sem-III |
+| Mustafa      | Khan Ali       | Computer Science | Sem-II  |
+| Muwahid Khan | Irfan Khan     | Computer Science | Sem-II  |
+| Arsalan      | Umar Khan      | Economics        | Sem-II  |
+| Ahsan        | Umar Khan      | Economics        | Sem-II  |
++--------------+----------------+------------------+---------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> SELECT st.Name AS "Student Name", FatherName, dept.Name AS Department, sem.Name AS Semester FROM Students st INNER JO
+IN Semesters sem ON sem.ID = st.Semester INNER JOIN Departments dept ON st.Department = dept.ID;
++--------------+----------------+------------------+----------+
+| Student Name | FatherName     | Department       | Semester |
++--------------+----------------+------------------+----------+
+| Ali          | Muhammad Khan  | Computer Science | Sem-IV   |
+| Wali         | Ayub Khan      | Computer Science | Sem-IV   |
+| Ali          | Noor Islam     | Computer Science | Sem-IV   |
+| Maaz         | Mati Ur Rehamn | Computer Science | Sem-IV   |
+| Azhar        | Haji Saib      | Economics        | Sem-III  |
+| Yasir        | Muhammad Gul   | Economics        | Sem-III  |
+| Mustafa      | Khan Ali       | Computer Science | Sem-II   |
+| Muwahid Khan | Irfan Khan     | Computer Science | Sem-II   |
+| Arsalan      | Umar Khan      | Economics        | Sem-II   |
+| Ahsan        | Umar Khan      | Economics        | Sem-II   |
++--------------+----------------+------------------+----------+
+10 rows in set (0.00 sec)
+
+MySQL [college]>
+
