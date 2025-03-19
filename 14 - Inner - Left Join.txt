@@ -1,0 +1,300 @@
+Microsoft Windows [Version 10.0.22631.5039]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\System32>mysql -u root -p
+Enter password: *****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> use college;
+Database changed
+MySQL [college]> select * from students;
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+| ID | Name         | FatherName     | Phone       | Department | Semester | Address  | GuardianPhone | OOP  | Civics | subject                  |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | 2          | 4        | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  2 | Wali         | Ayub Khan      | 03211234874 | 2          | 4        | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  3 | Ali          | Noor Islam     | 03212546987 | 2          | 4        | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | 2          | 4        | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  5 | Azhar        | Haji Saib      | 03219328719 | 1          | 3        | Peshawar | 03241238181   | NULL |     46 | NULL                     |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | 1          | 3        | Peshawar | 03241238181   | NULL |     96 | NULL                     |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | 2          | 2        | Swabi    | 03236543281   |    0 |      0 | NULL
+           |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | 2          | 2        | Nowshera | 03239215010   |    0 |      0 | NULL
+           |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+           |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+           |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+10 rows in set (0.02 sec)
+
+MySQL [college]> INSERT INTO students VALUES(NULL, "Farhan", "Qasim Shah", "03008765432", 3, 1, "Nowshera", "", 0, 0, "");
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [college]> select * from students;
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+| ID | Name         | FatherName     | Phone       | Department | Semester | Address  | GuardianPhone | OOP  | Civics | subject
+ |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | 2          | 4        | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  2 | Wali         | Ayub Khan      | 03211234874 | 2          | 4        | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  3 | Ali          | Noor Islam     | 03212546987 | 2          | 4        | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | 2          | 4        | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  5 | Azhar        | Haji Saib      | 03219328719 | 1          | 3        | Peshawar | 03241238181   | NULL |     46 | NULL
+ |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | 1          | 3        | Peshawar | 03241238181   | NULL |     96 | NULL
+ |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | 2          | 2        | Swabi    | 03236543281   |    0 |      0 | NULL
+ |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | 2          | 2        | Nowshera | 03239215010   |    0 |      0 | NULL
+ |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+ |
+MySQL [college]>    | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+MySQL [college]>
+MySQL [college]>    | Qasim Shah     | 03008765432 | 3          | 1        | Nowshera |               |    0 |      0 |
+MySQL [college]>
+MySQL [college]> ---+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+MySQL [college]> .00 sec)
+MySQL [college]>
+MySQL [college]> SELECT students.Name, FatherName, departments.Name FROM students INNER JOIN departments ON students.Deparment = departments.ID;
+
+ERROR 1054 (42S22): Unknown column 'students.Deparment' in 'on clause'
+MySQL [college]> SELECT students.Name, FatherName, departments.Name FROM students INNER JOIN departments ON students.Department = departments.ID
+;
++--------------+----------------+------------------+
+| Name         | FatherName     | Name             |
++--------------+----------------+------------------+
+| Ali          | Muhammad Khan  | Computer Science |
+| Wali         | Ayub Khan      | Computer Science |
+| Ali          | Noor Islam     | Computer Science |
+| Maaz         | Mati Ur Rehamn | Computer Science |
+| Azhar        | Haji Saib      | Economics        |
+| Yasir        | Muhammad Gul   | Economics        |
+| Mustafa      | Khan Ali       | Computer Science |
+| Muwahid Khan | Irfan Khan     | Computer Science |
+| Arsalan      | Umar Khan      | Economics        |
+| Ahsan        | Umar Khan      | Economics        |
++--------------+----------------+------------------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> INSERT INTO departments VLAUES(Null, "Chemistry");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VLAUES(Null, "Chemistry")' at line 1
+MySQL [college]> INSERT INTO departments VALUES(Null, "Chemistry");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MySQL [college]> INSERT INTO departments VALUES(Null, "Chemistry", 1);
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [college]> SELECT * FROM Departments;
++----+------------------+-----+
+| ID | Name             | HOD |
++----+------------------+-----+
+|  1 | Economics        |   4 |
+|  2 | Computer Science |   3 |
+|  3 | Chemistry        |   1 |
++----+------------------+-----+
+3 rows in set (0.00 sec)
+
+MySQL [college]> SELECT students.Name, FatherName, departments.Name FROM students INNER JOIN departments ON students.Department = departments.ID;
++--------------+----------------+------------------+
+| Name         | FatherName     | Name             |
++--------------+----------------+------------------+
+| Ali          | Muhammad Khan  | Computer Science |
+| Wali         | Ayub Khan      | Computer Science |
+| Ali          | Noor Islam     | Computer Science |
+| Maaz         | Mati Ur Rehamn | Computer Science |
+| Azhar        | Haji Saib      | Economics        |
+| Yasir        | Muhammad Gul   | Economics        |
+| Mustafa      | Khan Ali       | Computer Science |
+| Muwahid Khan | Irfan Khan     | Computer Science |
+| Arsalan      | Umar Khan      | Economics        |
+| Ahsan        | Umar Khan      | Economics        |
+| Farhan       | Qasim Shah     | Chemistry        |
++--------------+----------------+------------------+
+11 rows in set (0.00 sec)
+
+MySQL [college]> SELECT students.Name, FatherName, departments.Name, teachers.Name FROM students INNER JOIN departments ON students.Department =
+ departments.ID INNER JOIN Teachers ON teachers.ID = departments.HOD;
++--------------+----------------+------------------+----------------+
+| Name         | FatherName     | Name             | Name           |
++--------------+----------------+------------------+----------------+
+| Ali          | Muhammad Khan  | Computer Science | Younus Khan    |
+| Wali         | Ayub Khan      | Computer Science | Younus Khan    |
+| Ali          | Noor Islam     | Computer Science | Younus Khan    |
+| Maaz         | Mati Ur Rehamn | Computer Science | Younus Khan    |
+| Azhar        | Haji Saib      | Economics        | Asfandyar Khan |
+| Yasir        | Muhammad Gul   | Economics        | Asfandyar Khan |
+| Mustafa      | Khan Ali       | Computer Science | Younus Khan    |
+| Muwahid Khan | Irfan Khan     | Computer Science | Younus Khan    |
+| Arsalan      | Umar Khan      | Economics        | Asfandyar Khan |
+| Ahsan        | Umar Khan      | Economics        | Asfandyar Khan |
+| Farhan       | Qasim Shah     | Chemistry        | Azmat Khan     |
++--------------+----------------+------------------+----------------+
+11 rows in set (0.01 sec)
+
+MySQL [college]> SELECT * FROM Departments;
++----+------------------+-----+
+| ID | Name             | HOD |
++----+------------------+-----+
+|  1 | Economics        |   4 |
+|  2 | Computer Science |   3 |
+|  3 | Chemistry        |   1 |
++----+------------------+-----+
+3 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM Teachers;
++----+----------------+
+| ID | Name           |
++----+----------------+
+|  1 | Azmat Khan     |
+|  2 | Shakeel AKhter |
+|  3 | Younus Khan    |
+|  4 | Asfandyar Khan |
++----+----------------+
+4 rows in set (0.00 sec)
+
+MySQL [college]> UPDATE Departments SET HOD = 5 WHERE ID = 3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MySQL [college]> SELECT * FROM Departments;
++----+------------------+-----+
+| ID | Name             | HOD |
++----+------------------+-----+
+|  1 | Economics        |   4 |
+|  2 | Computer Science |   3 |
+|  3 | Chemistry        |   5 |
++----+------------------+-----+
+3 rows in set (0.00 sec)
+
+MySQL [college]> SELECT students.Name, FatherName, departments.Name, teachers.Name FROM students INNER JOIN departments ON students.Department = departments.ID INNER JOIN Teachers ON teachers.ID = departments.HOD;
++--------------+----------------+------------------+----------------+
+| Name         | FatherName     | Name             | Name           |
++--------------+----------------+------------------+----------------+
+| Ali          | Muhammad Khan  | Computer Science | Younus Khan    |
+| Wali         | Ayub Khan      | Computer Science | Younus Khan    |
+| Ali          | Noor Islam     | Computer Science | Younus Khan    |
+| Maaz         | Mati Ur Rehamn | Computer Science | Younus Khan    |
+| Azhar        | Haji Saib      | Economics        | Asfandyar Khan |
+| Yasir        | Muhammad Gul   | Economics        | Asfandyar Khan |
+| Mustafa      | Khan Ali       | Computer Science | Younus Khan    |
+| Muwahid Khan | Irfan Khan     | Computer Science | Younus Khan    |
+| Arsalan      | Umar Khan      | Economics        | Asfandyar Khan |
+| Ahsan        | Umar Khan      | Economics        | Asfandyar Khan |
++--------------+----------------+------------------+----------------+
+10 rows in set (0.00 sec)
+
+MySQL [college]> SELECT * FROM students;
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+| ID | Name         | FatherName     | Phone       | Department | Semester | Address  | GuardianPhone | OOP  | Civics | subject
+ |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+|  1 | Ali          | Muhammad Khan  | 03211234567 | 2          | 4        | Nowshera | NULL          |   75 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  2 | Wali         | Ayub Khan      | 03211234874 | 2          | 4        | Nowshera | NULL          |   65 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  3 | Ali          | Noor Islam     | 03212546987 | 2          | 4        | Shaidu   | NULL          |   25 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  4 | Maaz         | Mati Ur Rehamn | 03214578213 | 2          | 4        | Swabi    | NULL          |   46 |   NULL | DB, Web, OS, DSA, SE, AP |
+|  5 | Azhar        | Haji Saib      | 03219328719 | 1          | 3        | Peshawar | 03241238181   | NULL |     46 | NULL
+ |
+|  6 | Yasir        | Muhammad Gul   | 03219328434 | 1          | 3        | Peshawar | 03241238181   | NULL |     96 | NULL
+ |
+|  7 | Mustafa      | Khan Ali       | 03241238764 | 2          | 2        | Swabi    | 03236543281   |    0 |      0 | NULL
+ |
+|  8 | Muwahid Khan | Irfan Khan     | 03217645312 | 2          | 2        | Nowshera | 03239215010   |    0 |      0 | NULL
+ |
+|  9 | Arsalan      | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+ |
+| 10 | Ahsan        | Umar Khan      | 03217645312 | 1          | 2        | Nowshera | 03238572145   |    0 |      0 | NULL
+ |
+| 11 | Farhan       | Qasim Shah     | 03008765432 | 3          | 1        | Nowshera |               |    0 |      0 |
+ |
++----+--------------+----------------+-------------+------------+----------+----------+---------------+------+--------+--------------------------+
+11 rows in set (0.00 sec)
+
+MySQL [college]> INSERT INTO students VALUES(NULL, "Mudassar", "Akhter Gul", "03008765432", 4, 1, "Nowshera", "", 0, 0, "");
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [college]> SELECT students.Name, FatherName, departments.Name FROM students INNER JOIN departments ON students.Department = departments.ID;
++--------------+----------------+------------------+
+| Name         | FatherName     | Name             |
++--------------+----------------+------------------+
+| Ali          | Muhammad Khan  | Computer Science |
+| Wali         | Ayub Khan      | Computer Science |
+| Ali          | Noor Islam     | Computer Science |
+| Maaz         | Mati Ur Rehamn | Computer Science |
+| Azhar        | Haji Saib      | Economics        |
+| Yasir        | Muhammad Gul   | Economics        |
+| Mustafa      | Khan Ali       | Computer Science |
+| Muwahid Khan | Irfan Khan     | Computer Science |
+| Arsalan      | Umar Khan      | Economics        |
+| Ahsan        | Umar Khan      | Economics        |
+| Farhan       | Qasim Shah     | Chemistry        |
++--------------+----------------+------------------+
+11 rows in set (0.00 sec)
+
+MySQL [college]> SELECT students.Name, FatherName, departments.Name FROM students LEFT JOIN departments ON students.Department = departments.ID;
+
++--------------+----------------+------------------+
+| Name         | FatherName     | Name             |
++--------------+----------------+------------------+
+| Ali          | Muhammad Khan  | Computer Science |
+| Wali         | Ayub Khan      | Computer Science |
+| Ali          | Noor Islam     | Computer Science |
+| Maaz         | Mati Ur Rehamn | Computer Science |
+| Azhar        | Haji Saib      | Economics        |
+| Yasir        | Muhammad Gul   | Economics        |
+| Mustafa      | Khan Ali       | Computer Science |
+| Muwahid Khan | Irfan Khan     | Computer Science |
+| Arsalan      | Umar Khan      | Economics        |
+| Ahsan        | Umar Khan      | Economics        |
+| Farhan       | Qasim Shah     | Chemistry        |
+| Mudassar     | Akhter Gul     | NULL             |
++--------------+----------------+------------------+
+12 rows in set (0.00 sec)
+
+MySQL [college]> SELECT stu.Name, stu.FatherName, dept.Name, t.Name FROM students stu LEFT JOIN departments dept ON stu.Department = dept.ID INN
+ER JOIN Teachers t ON t.ID = dept.HOD;
++--------------+----------------+------------------+----------------+
+| Name         | FatherName     | Name             | Name           |
++--------------+----------------+------------------+----------------+
+| Ali          | Muhammad Khan  | Computer Science | Younus Khan    |
+| Wali         | Ayub Khan      | Computer Science | Younus Khan    |
+| Ali          | Noor Islam     | Computer Science | Younus Khan    |
+| Maaz         | Mati Ur Rehamn | Computer Science | Younus Khan    |
+| Azhar        | Haji Saib      | Economics        | Asfandyar Khan |
+| Yasir        | Muhammad Gul   | Economics        | Asfandyar Khan |
+| Mustafa      | Khan Ali       | Computer Science | Younus Khan    |
+| Muwahid Khan | Irfan Khan     | Computer Science | Younus Khan    |
+| Arsalan      | Umar Khan      | Economics        | Asfandyar Khan |
+| Ahsan        | Umar Khan      | Economics        | Asfandyar Khan |
++--------------+----------------+------------------+----------------+
+10 rows in set (0.01 sec)
+
+MySQL [college]> SELECT stu.Name, stu.FatherName, dept.Name, t.Name FROM students stu LEFT JOIN departments dept ON stu.Department = dept.ID LEFT JOIN Teachers t ON t.ID = dept.HOD;
++--------------+----------------+------------------+----------------+
+| Name         | FatherName     | Name             | Name           |
++--------------+----------------+------------------+----------------+
+| Ali          | Muhammad Khan  | Computer Science | Younus Khan    |
+| Wali         | Ayub Khan      | Computer Science | Younus Khan    |
+| Ali          | Noor Islam     | Computer Science | Younus Khan    |
+| Maaz         | Mati Ur Rehamn | Computer Science | Younus Khan    |
+| Azhar        | Haji Saib      | Economics        | Asfandyar Khan |
+| Yasir        | Muhammad Gul   | Economics        | Asfandyar Khan |
+| Mustafa      | Khan Ali       | Computer Science | Younus Khan    |
+| Muwahid Khan | Irfan Khan     | Computer Science | Younus Khan    |
+| Arsalan      | Umar Khan      | Economics        | Asfandyar Khan |
+| Ahsan        | Umar Khan      | Economics        | Asfandyar Khan |
+| Farhan       | Qasim Shah     | Chemistry        | NULL           |
+| Mudassar     | Akhter Gul     | NULL             | NULL           |
++--------------+----------------+------------------+----------------+
+12 rows in set (0.00 sec)
+
+MySQL [college]>
+
+
+
