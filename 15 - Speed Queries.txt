@@ -1,0 +1,254 @@
+Microsoft Windows [Version 10.0.22631.5039]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\System32>mysql -u root -p
+Enter password: *****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> CREATE DATABASE ImtiazStore;
+Query OK, 1 row affected (0.09 sec)
+
+MySQL [(none)]> use imtiazstore;
+Database changed
+MySQL [imtiazstore]> CREATE TABLE Customers (ID INT PRIMARY KEY AUTO_INCREMENT, CustomerName VARCHAR(30) NOT NULL, ContactNumber VARCHAR(11) NOT NULL);
+Query OK, 0 rows affected (0.07 sec)
+
+MySQL [imtiazstore]> CREATE TABLE Products (ID INT PRIMARY KEY AUTO_INCREMENT, ProductName VARCHAR(50) NOT NULL, UnitPrice INT NOT NULL);
+Query OK, 0 rows affected (0.01 sec)
+
+MySQL [imtiazstore]> CREATE TABLE Orders (ID INT PRIMARY KEY AUTO_INCREMENT, CustomerID INT NOT NULL, ProductID INT NOT NULL, Quantity INT NOT NULL, OrderDate DATE NOT NULL);
+Query OK, 0 rows affected (0.02 sec)
+
+MySQL [imtiazstore]> show tables;
++-----------------------+
+| Tables_in_imtiazstore |
++-----------------------+
+| customers             |
+| orders                |
+| products              |
++-----------------------+
+3 rows in set (0.06 sec)
+
+MySQL [imtiazstore]> INSERT INTO Customers VALUES(201, "John Doe", "555-1234"), (NULL, "Maria Gonzalez", "555-5678"), (NULL, "Ahmad Khan", "555-9012");
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MySQL [imtiazstore]> SELECT * FROM Customers;
++-----+----------------+---------------+
+| ID  | CustomerName   | ContactNumber |
++-----+----------------+---------------+
+| 201 | John Doe       | 555-1234      |
+| 202 | Maria Gonzalez | 555-5678      |
+| 203 | Ahmad Khan     | 555-9012      |
++-----+----------------+---------------+
+3 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> INSERT INTO Products (501, "Wireless Mouse", 25), (NULL, "Laptop Stand", 45), (NULL, "USB-C Hub", 30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '501, "Wireless Mouse", 25), (NULL, "Laptop Stand", 45), (NULL, "USB-C Hub", 30)' at line 1
+MySQL [imtiazstore]> INSERT INTO Products VALUES(501, "Wireless Mouse", 25), (NULL, "Laptop Stand", 45), (NULL, "USB-C Hub", 30);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MySQL [imtiazstore]> SELECT * FROM Products;
++-----+----------------+-----------+
+| ID  | ProductName    | UnitPrice |
++-----+----------------+-----------+
+| 501 | Wireless Mouse |        25 |
+| 502 | Laptop Stand   |        45 |
+| 503 | USB-C Hub      |        30 |
++-----+----------------+-----------+
+3 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> INSERT INTO Orders VALUES(9001, 201, 501, 2, "2025-03-18"), (NULL, 202, 502, 1, "2025-03-19"), (NULL, 203, 503, 3, "2025-03-19"), (NULL, 201, 503, 1, "2025-03-20");
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MySQL [imtiazstore]> SELECT * FROM Orders;
++------+------------+-----------+----------+------------+
+| ID   | CustomerID | ProductID | Quantity | OrderDate  |
++------+------------+-----------+----------+------------+
+| 9001 |        201 |       501 |        2 | 2025-03-18 |
+| 9002 |        202 |       502 |        1 | 2025-03-19 |
+| 9003 |        203 |       503 |        3 | 2025-03-19 |
+| 9004 |        201 |       503 |        1 | 2025-03-20 |
++------+------------+-----------+----------+------------+
+4 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT * FROM Orders WHERE OrderDate > "2025-03-18";
++------+------------+-----------+----------+------------+
+| ID   | CustomerID | ProductID | Quantity | OrderDate  |
++------+------------+-----------+----------+------------+
+| 9002 |        202 |       502 |        1 | 2025-03-19 |
+| 9003 |        203 |       503 |        3 | 2025-03-19 |
+| 9004 |        201 |       503 |        1 | 2025-03-20 |
++------+------------+-----------+----------+------------+
+3 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT * FROM Products WHERE UnitPrice > 25;
++-----+--------------+-----------+
+| ID  | ProductName  | UnitPrice |
++-----+--------------+-----------+
+| 502 | Laptop Stand |        45 |
+| 503 | USB-C Hub    |        30 |
++-----+--------------+-----------+
+2 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT CustomerName, ContactNumber FROM Customers;
++----------------+---------------+
+| CustomerName   | ContactNumber |
++----------------+---------------+
+| John Doe       | 555-1234      |
+| Maria Gonzalez | 555-5678      |
+| Ahmad Khan     | 555-9012      |
++----------------+---------------+
+3 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT Customers.CustomerName FROM Customers INNER JOIN Orders ON Customers.ID = Orders.CustomerID;
++----------------+
+| CustomerName   |
++----------------+
+| John Doe       |
+| Maria Gonzalez |
+| Ahmad Khan     |
+| John Doe       |
++----------------+
+4 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> INSERT INTO Customers VALUES(NULL, "Faisal", "555-1234"), (NULL, "Ameen", "555-5678"), (NULL, "Ali Khan", "555-9012");
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MySQL [imtiazstore]> SELECT Customers.CustomerName FROM Customers INNER JOIN Orders ON Customers.ID = Orders.CustomerID;
++----------------+
+| CustomerName   |
++----------------+
+| John Doe       |
+| Maria Gonzalez |
+| Ahmad Khan     |
+| John Doe       |
++----------------+
+4 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT * FROM Customers;
++-----+----------------+---------------+
+| ID  | CustomerName   | ContactNumber |
++-----+----------------+---------------+
+| 201 | John Doe       | 555-1234      |
+| 202 | Maria Gonzalez | 555-5678      |
+| 203 | Ahmad Khan     | 555-9012      |
+| 204 | Faisal         | 555-1234      |
+| 205 | Ameen          | 555-5678      |
+| 206 | Ali Khan       | 555-9012      |
++-----+----------------+---------------+
+6 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT Customers.ID, Customers.CustomerName FROM Customers INNER JOIN Orders ON Customers.ID = Orders.CustomerID;
++-----+----------------+
+| ID  | CustomerName   |
++-----+----------------+
+| 201 | John Doe       |
+| 202 | Maria Gonzalez |
+| 203 | Ahmad Khan     |
+| 201 | John Doe       |
++-----+----------------+
+4 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT Customers.ID, Customers.CustomerName FROM Customers INNER JOIN Orders ON Customers.ID = Orders.CustomerID GROUP BY Customers.ID;
++-----+----------------+
+| ID  | CustomerName   |
++-----+----------------+
+| 201 | John Doe       |
+| 202 | Maria Gonzalez |
+| 203 | Ahmad Khan     |
++-----+----------------+
+3 rows in set (0.01 sec)
+
+MySQL [imtiazstore]> SELECT Customers.ID, Customers.CustomerName FROM Customers INNER JOIN Orders ON Customers.ID = Orders.CustomerID INNER JOIN Products ON Orders.ProductID = Products.ID WHERE Products.ProductName = "USB-C Hub" GROUP BY Customers.ID;
++-----+--------------+
+| ID  | CustomerName |
++-----+--------------+
+| 203 | Ahmad Khan   |
+| 201 | John Doe     |
++-----+--------------+
+2 rows in set (0.01 sec)
+
+MySQL [imtiazstore]> SELECT Customers.ID, Customers.Name FROM Customers LEFT JOIN Orders ON Customers.ID = Orders.CustomerID GROUP BY Customers.ID;
+ERROR 1054 (42S22): Unknown column 'Customers.Name' in 'field list'
+MySQL [imtiazstore]> SELECT Customers.ID, Customers.CustomerName FROM Customers LEFT JOIN Orders ON Customers.ID = Orders.CustomerID GROUP BY Customers.ID;
++-----+----------------+
+| ID  | CustomerName   |
++-----+----------------+
+| 201 | John Doe       |
+| 202 | Maria Gonzalez |
+| 203 | Ahmad Khan     |
+| 204 | Faisal         |
+| 205 | Ameen          |
+| 206 | Ali Khan       |
++-----+----------------+
+6 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT Customers.ID, Customers.CustomerName, Orders.ID as OrderID FROM Customers LEFT JOIN Orders ON Customers.ID = Orders.CustomerID GROUP BY Customers.ID;
++-----+----------------+---------+
+| ID  | CustomerName   | OrderID |
++-----+----------------+---------+
+| 201 | John Doe       |    9004 |
+| 202 | Maria Gonzalez |    9002 |
+| 203 | Ahmad Khan     |    9003 |
+| 204 | Faisal         |    NULL |
+| 205 | Ameen          |    NULL |
+| 206 | Ali Khan       |    NULL |
++-----+----------------+---------+
+6 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT Customers.ID, Customers.CustomerName, Orders.ID as OrderID FROM Customers LEFT JOIN Orders ON Customers.ID = Orders.CustomerID WHERE Orders.ID IS NULL GROUP BY Customers.ID;
++-----+--------------+---------+
+| ID  | CustomerName | OrderID |
++-----+--------------+---------+
+| 204 | Faisal       |    NULL |
+| 205 | Ameen        |    NULL |
+| 206 | Ali Khan     |    NULL |
++-----+--------------+---------+
+3 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT Orders.* FROM Orders INNER JOIN Products ON Orders.ProductID = Products.ID WHERE MUL(Orders.Quantity, Products.UnitPrice) > 50;
+ERROR 1305 (42000): FUNCTION imtiazstore.MUL does not exist
+MySQL [imtiazstore]> SELECT Orders.* FROM Orders INNER JOIN Products ON Orders.ProductID = Products.ID WHERE Orders.Quantity * Products.UnitPrice > 50;
++------+------------+-----------+----------+------------+
+| ID   | CustomerID | ProductID | Quantity | OrderDate  |
++------+------------+-----------+----------+------------+
+| 9003 |        203 |       503 |        3 | 2025-03-19 |
++------+------------+-----------+----------+------------+
+1 row in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT Customers.Name FROM Customers INNER JOIN Orders ON Customers.ID = Orders.CustomerID WHERE Orders.Quantity > 1;
+ERROR 1054 (42S22): Unknown column 'Customers.Name' in 'field list'
+MySQL [imtiazstore]> SELECT Customers.CustomerName FROM Customers INNER JOIN Orders ON Customers.ID = Orders.CustomerID WHERE Orders.Quantity > 1;
++--------------+
+| CustomerName |
++--------------+
+| John Doe     |
+| Ahmad Khan   |
++--------------+
+2 rows in set (0.00 sec)
+
+MySQL [imtiazstore]> SELECT Products.ProductName FROM Products LEFT JOIN Orders ON Products.ID = Orders.ProductID WHERE Orders.ID IS NULL;
+Empty set (0.00 sec)
+
+MySQL [imtiazstore]> INSERT INTO Products VALUES(NULL, "Magnum", 380);
+Query OK, 1 row affected (0.00 sec)
+
+MySQL [imtiazstore]> SELECT Products.ProductName FROM Products LEFT JOIN Orders ON Products.ID = Orders.ProductID WHERE Orders.ID IS NULL;
++-------------+
+| ProductName |
++-------------+
+| Magnum      |
++-------------+
+1 row in set (0.00 sec)
+
+MySQL [imtiazstore]>
